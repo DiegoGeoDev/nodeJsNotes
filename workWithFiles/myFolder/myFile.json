@@ -1,0 +1,9 @@
+{
+	"text": "Aprendendo trabalhar com arquivos no Node.js",
+	"text2": "read",
+	"arr": ["a", "b", "c"],
+	"obj": {
+		"a": 1,
+		"b": 2
+	}
+}
