@@ -4,4 +4,4 @@
 
 Exemplos de como Ler, Escrever, Deletar e Mover arquivos.
 
-[Trabalhando com Arquivos]('https://github.com/DiegoGeoDev/nodeJsNotes/blob/master/workWithFiles/README.md')
+[Trabalhando com Arquivos]('https://github.com/DiegoGeoDev/nodeJsNotes/tree/master/workWithFiles')
