@@ -4,4 +4,8 @@
 
 Exemplos de como Ler, Escrever, Deletar e Mover arquivos.
 
-[Trabalhando com Arquivos](https://github.com/DiegoGeoDev/nodeJsNotes/tree/master/workWithFiles)
+Futuras Atualizações:
+
+- Copiar
+
+[Exemplos](https://github.com/DiegoGeoDev/nodeJsNotes/tree/master/workWithFiles)
