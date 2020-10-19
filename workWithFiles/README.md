@@ -136,14 +136,12 @@ e com `REGEX` podemos verificar o tipo dos itens.
 const fs = require('fs').promises;
 const path = require('path');
 
-// CONSTRUTOR DE REGEX PARA O TIPO DE ARQUIVO
 function fileTypeRegexBuilder(fileType) {
 	const pattern = String.raw`.*\.FILE_TYPE$`.replace('FILE_TYPE', fileType);
 	const regex = new RegExp(pattern, 'i');
 	return regex;
 }
 
-// LISTAR ARQUIVOS DE UM DIRETÓRIO
 async function listFiles(filePath, fileType = '*', fullPath = false) {
 	try {
 		const items = await fs.readdir(filePath, { withFileTypes: true });
