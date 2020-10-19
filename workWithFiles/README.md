@@ -5,10 +5,10 @@ trabalhar com diretórios.
 
 **Pré-requisitos**
 
-- Ter o Node.js instalado no computador.
-  [Node.js](https://nodejs.org/en/)
-- Estar familiarizado com JavaScript Promises.
-  [JavaScript Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- Ter o Node.js instalado no computador.<br>
+  [Node.js](https://nodejs.org/en/)<br>
+- Estar familiarizado com JavaScript Promises.<br>
+  [JavaScript Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)<br>
   [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
 #### 1 - LER
