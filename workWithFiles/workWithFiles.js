@@ -1,11 +1,13 @@
 // IMPORTANDO O MÓDULO FILE SYSTEM
 const fs = require('fs').promises;
+const path = require('path');
 
 // CAMINHO DOS ARQUIVOS
 const TXT_FILEPATH = './myFolder/myFile.txt';
 const JSON_FILEPATH = './myFolder/myFile.json';
 const JSON_FILEPATH_2 = './myFolder/myFile_2.json';
 const CSV_FILEPATH = './myFolder/myFile.csv';
+const WWF_DIR = './myFolder';
 
 // LER ARQUIVOS
 async function readFile(filePath, parseJSON = false) {
@@ -49,6 +51,72 @@ async function moveFile(currentPath, destinationPath) {
 	}
 }
 
+// COPIAR ARQUIVOS
+async function copyFile(filePath, copyPath) {
+	try {
+		await fs.copyFile(filePath, copyPath);
+		console.log('COPIED');
+	} catch (error) {
+		console.error(`ERROR: ${error.message}`);
+	}
+}
+
+// CONSTRUTOR DE REGEX PARA O TIPO DE ARQUIVO
+function fileTypeRegexBuilder(fileType) {
+	const pattern = String.raw`.*\.FILE_TYPE$`.replace('FILE_TYPE', fileType);
+	const regex = new RegExp(pattern, 'i');
+	return regex;
+}
+
+// LISTAR ARQUIVOS DE UM DIRETÓRIO
+async function listFiles(filePath, fileType = '*', fullPath = false) {
+	try {
+		const items = await fs.readdir(filePath, { withFileTypes: true });
+
+		const regex = fileTypeRegexBuilder(fileType);
+
+		const files =
+			fileType !== '*'
+				? items.reduce((accumulator, item) => {
+						if (!item.isDirectory() && item.name.match(regex)) {
+							const file = fullPath ? path.join(filePath, item.name) : item.name;
+							accumulator.push(file);
+						}
+						return accumulator;
+				  }, [])
+				: items.reduce((accumulator, item) => {
+						if (!item.isDirectory()) {
+							const file = fullPath ? path.join(filePath, item.name) : item.name;
+							accumulator.push(file);
+						}
+						return accumulator;
+				  }, []);
+
+		console.log(files);
+	} catch (error) {
+		console.error(`ERROR: ${error.message}`);
+	}
+}
+
+// LISTAR ARQUIVOS DE UM DIRETÓRIO
+async function listFolders(filePath, fullPath = false) {
+	try {
+		const items = await fs.readdir(filePath, { withFileTypes: true });
+
+		const folders = items.reduce((accumulator, item) => {
+			if (item.isDirectory()) {
+				const folder = fullPath ? path.join(filePath, item.name) : item.name;
+				accumulator.push(folder);
+			}
+			return accumulator;
+		}, []);
+
+		console.log(folders);
+	} catch (error) {
+		console.error(`ERROR: ${error.message}`);
+	}
+}
+
 // TESTES
 (async function () {
 	// LER ARQUIVOS
@@ -72,4 +140,16 @@ async function moveFile(currentPath, destinationPath) {
 	await writeFile(CURRENT_PATH, 'moved', 'w'); // *CRIAR PARA O TESTE
 	await moveFile(CURRENT_PATH, DESTINATION_PATH);
 	await deleteFile(DESTINATION_PATH); // *DELETAR PARA O TESTE
+
+	// COPIAR ARQUIVOS
+	await copyFile(TXT_FILEPATH, './myFolder/myFileCopy.txt');
+
+	// LISTAR ARQUIVOS DE UM DIRETÓRIO
+	await listFiles(WWF_DIR);
+	await listFiles(WWF_DIR, 'json');
+	await listFiles(WWF_DIR, 'json', true);
+
+	// LISTAR ARQUIVOS DE UM DIRETÓRIO
+	await listFolders(WWF_DIR);
+	await listFolders(WWF_DIR, true);
 })();
